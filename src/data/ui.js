@@ -308,7 +308,7 @@ export const uiData = [
       order: 305,
    },
    {
-      name: "SortArrAlpha",
+      name: "sortArrAlpha",
       desc: "Sort an array alphabetically using sort method",
       inputs: 1,
       type: "Functional",
@@ -317,7 +317,7 @@ export const uiData = [
       order: 306,
    },
    {
-      name: "SpltStrArr",
+      name: "spltStrArr",
       desc: "Split a string into an Array using split method.",
       inputs: 1,
       type: "Functional",
