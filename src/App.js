@@ -18,25 +18,37 @@ export default class App extends React.Component {
       };
    }
    toggleFavorites(e) {
-      //set this to the oppis of state above ! single exclamation means opposite
+      //set this to the oppisite of state above ! single exclamation means opposite
       this.setState({ isFavoritesChecked: !this.state.isFavoritesChecked });
-      const userInput = e.target.id; //grabbing user input id
-      console.log(userInput);
+      //const userInput = e.target.id; //grabbing user input id method before doing state with search
+      const isFavoritesChecked = document.getElementById("viewMode-favorites")
+         .checked;
+      console.log(isFavoritesChecked);
+      const searchInput = document.getElementById("search-input").value;
       const allFuncs = [...this.state.allFuncs]; // grabbing copy of all funcs with spread shallow copy
-      if (userInput === "viewMode-favorites") {
-         const filteredFuncs = allFuncs.filter((func) => {
+      //if (userInput === "viewMode-favorites") {
+      if (isFavoritesChecked) {
+         const favoriteFuncs = allFuncs.filter((func) => {
             // run filter on copy where is favorite is true
             return func.isFavorite;
          });
-         console.log(filteredFuncs); // expect a blank array in console
+         console.log(favoriteFuncs); // expect a blank array in console
+         const filteredFuncs = favoriteFuncs.filter((func) => {
+            return func.name.indexOf(searchInput) >= 0;
+         });
+
          this.setState({ displayedFuncs: filteredFuncs });
       } else {
-         this.setState({ displayedFuncs: allFuncs });
+         const filteredFuncs = allFuncs.filter((func) => {
+            return func.name.indexOf(searchInput) >= 0;
+         });
+
+         this.setState({ displayedFuncs: filteredFuncs });
       }
    }
 
    // after render
-   /*  high num to low num shrt hand passing each object in array uiData comparing each order num with eachother use dot notation to sort by order */
+   // high num to low num shrt hand passing each object in array uiData comparing each order num with eachother use dot notation to sort by order
    render() {
       const getFunctionsNum = () => {
          return size(uiData);
@@ -112,7 +124,9 @@ export default class App extends React.Component {
                </div>
                {this.state.displayedFuncs.map((functionUI) => {
                   const { name, desc, inputs } = functionUI;
+
                   //passing props
+
                   return (
                      <FunctionUI
                         key={name}
