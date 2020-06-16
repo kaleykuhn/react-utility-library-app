@@ -332,7 +332,7 @@ export const uiData = [
       inputs: 1,
       type: "Functional",
       typeNum: 300,
-      isFavorite: false,
+      isFavorite: true,
       order: 308,
    },
    {
