@@ -24,20 +24,23 @@ export default class App extends React.Component {
       return (
          <div className="container">
             <div className="row">
-               <div class="col-12">
-                  <h1 class="d-flex justify-content-center">
+               <div className="col-12">
+                  <h1 className="d-flex justify-content-center">
                      JavaScript Functions: Basic
                   </h1>
-                  <p class="text-center lead mb-4">
+                  <p className="text-center lead mb-4">
                      {getFunctionsNum()}&nbsp;functions documented
                   </p>
                </div>
                {orderedData.map((functionUI) => {
+                  const { name, desc, inputs } = functionUI;
+
                   return (
                      <FunctionUI
-                        name={functionUI.name}
-                        desc={functionUI.desc}
-                        inputs={functionUI.inputs}
+                        key={name}
+                        name={name}
+                        desc={desc}
+                        inputs={inputs}
                      />
                   );
                })}
