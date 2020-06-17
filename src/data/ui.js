@@ -322,7 +322,7 @@ export const uiData = [
       inputs: 1,
       type: "Functional",
       typeNum: 300,
-      isFavorite: false,
+      isFavorite: true,
       order: 307,
    },
    {
@@ -332,7 +332,7 @@ export const uiData = [
       inputs: 1,
       type: "Functional",
       typeNum: 300,
-      isFavorite: true,
+      isFavorite: false,
       order: 308,
    },
    {
@@ -433,7 +433,7 @@ export const uiData = [
       inputs: 2,
       type: "Algorithms",
       typeNum: 400,
-      isFavorite: false,
+      isFavorite: true,
       order: 407,
    },
    {
