@@ -17,33 +17,40 @@ export default class App extends React.Component {
          displayedFuncs: uiData,
       };
    }
-   toggleFavorites(e) {
-      //set this to the oppisite of state above ! single exclamation means opposite
-      this.setState({ isFavoritesChecked: !this.state.isFavoritesChecked });
+   //array
+   filterFuncs(e) {
       //const userInput = e.target.id; //grabbing user input id method before doing state with search
       const isFavoritesChecked = document.getElementById("viewMode-favorites")
          .checked;
       console.log(isFavoritesChecked);
-      const searchInput = document.getElementById("search-input").value;
+      const searchInput = document
+         .getElementById("search-input")
+         .value.toLowerCase(); // var to check input val and toLowerCase because its string
       const allFuncs = [...this.state.allFuncs]; // grabbing copy of all funcs with spread shallow copy
       //if (userInput === "viewMode-favorites") {
       if (isFavoritesChecked) {
+         //set this to the oppisite of state above ! single exclamation means opposite of isfavorite check
+         //we know if this is checked now by looking at page itself no longer look at state
+         this.setState({ isFavoritesChecked: true });
          const favoriteFuncs = allFuncs.filter((func) => {
             // run filter on copy where is favorite is true
             return func.isFavorite;
          });
          console.log(favoriteFuncs); // expect a blank array in console
+         //true goes to new array created by filter function
          const filteredFuncs = favoriteFuncs.filter((func) => {
-            return func.name.indexOf(searchInput) >= 0;
+            return func.name.toLowerCase().indexOf(searchInput) >= 0;
          });
-
-         this.setState({ displayedFuncs: filteredFuncs });
+         const orderedFuncs = orderBy(filteredFuncs, "name", "desc");
+         this.setState({ displayedFuncs: orderedFuncs });
       } else {
+         //  if it is not checked it will false if isfavcheck set the state to the opposite set this to the oppisite of state above ! single exclamation means opposite of isfavorite check
+         this.setState({ isFavoritesChecked: false });
          const filteredFuncs = allFuncs.filter((func) => {
-            return func.name.indexOf(searchInput) >= 0;
+            return func.name.toLowerCase().indexOf(searchInput) >= 0;
          });
-
-         this.setState({ displayedFuncs: filteredFuncs });
+         const orderedFuncs = orderBy(filteredFuncs, "name", "desc");
+         this.setState({ displayedFuncs: orderedFuncs });
       }
    }
 
@@ -73,7 +80,7 @@ export default class App extends React.Component {
                         className="custom-control-input"
                         checked={!this.state.isFavoritesChecked}
                         onChange={(e) => {
-                           this.toggleFavorites(e);
+                           this.filterFuncs(e);
                         }}
                      />
                      <label
@@ -91,7 +98,7 @@ export default class App extends React.Component {
                         className="custom-control-input"
                         checked={this.state.isFavoritesChecked}
                         onChange={(e) => {
-                           this.toggleFavorites(e);
+                           this.filterFuncs(e);
                         }}
                      />
                      <label
@@ -103,6 +110,7 @@ export default class App extends React.Component {
                   </div>
                   <div className="row mt-3">
                      <div className="col-6">
+                        {/* onChange keep scope local pass it e change event fire anonymous function and call Filterfunc up above no binding needed*/}
                         <input
                            type="text"
                            className="form-control"
@@ -110,6 +118,9 @@ export default class App extends React.Component {
                            aria-label="Search all functions"
                            aria-describedby="search-input"
                            id="search-input"
+                           onChange={(e) => {
+                              this.filterFuncs(e);
+                           }}
                         />
                      </div>
                      <div className="col-6">
