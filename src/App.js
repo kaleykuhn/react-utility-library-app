@@ -10,11 +10,13 @@ export default class App extends React.Component {
    constructor() {
       super();
       console.log(uiData);
+
       this.state = {
          /*listOfThings: [], this would be mult things to set*/
          isFavoritesChecked: false,
-         allFuncs: uiData,
-         displayedFuncs: uiData,
+         allFuncs: orderBy(uiData, "order", "desc"),
+         displayedFuncs: orderBy(uiData, "order", "desc"),
+         orderBy: '["order", "desc"]',
       };
    }
    //array
@@ -41,7 +43,9 @@ export default class App extends React.Component {
          const filteredFuncs = favoriteFuncs.filter((func) => {
             return func.name.toLowerCase().indexOf(searchInput) >= 0;
          });
-         const orderedFuncs = orderBy(filteredFuncs, "name", "desc");
+         const orderArr = JSON.parse(this.state.orderBy);
+         console.log("orderArr:", orderArr);
+         const orderedFuncs = orderBy(filteredFuncs, ...orderArr);
          this.setState({ displayedFuncs: orderedFuncs });
       } else {
          //  if it is not checked it will false if isfavcheck set the state to the opposite set this to the oppisite of state above ! single exclamation means opposite of isfavorite check
@@ -49,11 +53,17 @@ export default class App extends React.Component {
          const filteredFuncs = allFuncs.filter((func) => {
             return func.name.toLowerCase().indexOf(searchInput) >= 0;
          });
-         const orderedFuncs = orderBy(filteredFuncs, "name", "desc");
+         const orderArr = JSON.parse(this.state.orderBy);
+         console.log("orderArr: ", ...orderArr);
+         const orderedFuncs = orderBy(filteredFuncs, ...orderArr);
          this.setState({ displayedFuncs: orderedFuncs });
       }
    }
-
+   changeOrder(e) {
+      this.setState({ orderBy: e.target.value }, () => {
+         this.filterFuncs();
+      });
+   }
    // after render
    // high num to low num shrt hand passing each object in array uiData comparing each order num with eachother use dot notation to sort by order
    render() {
@@ -124,11 +134,17 @@ export default class App extends React.Component {
                         />
                      </div>
                      <div className="col-6">
-                        <select className=" form-control ">
-                           <option>Most recent</option>
-                           <option>Oldest</option>
-                           <option>A - Z</option>
-                           <option>Z - A</option>
+                        <select
+                           value={this.state.orderBy}
+                           className=" form-control "
+                           onChange={(e) => this.changeOrder(e)}
+                        >
+                           <option value='["order", "desc"]'>
+                              Most recent
+                           </option>
+                           <option value='["order", "asc"]'>Oldest</option>
+                           <option value='["name", "asc"]'>A - Z</option>
+                           <option value='["name", "desc"]'>Z - A</option>
                         </select>
                      </div>
                   </div>
