@@ -62,6 +62,7 @@ export default class App extends React.Component {
          //storing params
          const orderArr = JSON.parse(this.state.orderBy);
          console.log("orderArr: ", ...orderArr);
+         //two seperate strings with rest first arr u need and second prop
          const orderedFuncs = orderBy(filteredFuncs, ...orderArr);
          this.setState({ displayedFuncs: orderedFuncs });
       }
