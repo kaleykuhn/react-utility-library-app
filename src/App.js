@@ -7,6 +7,8 @@ import size from "lodash/size";
 
 // this is a pre-built class given name App adding into component before render
 export default class App extends React.Component {
+   //this is a class component
+
    constructor() {
       super();
       console.log(uiData);
@@ -16,6 +18,7 @@ export default class App extends React.Component {
          isFavoritesChecked: false,
          allFuncs: orderBy(uiData, "order", "desc"),
          displayedFuncs: orderBy(uiData, "order", "desc"),
+         //storing the string to value of state and setting to Most Recent
          orderBy: '["order", "desc"]',
       };
    }
@@ -41,11 +44,14 @@ export default class App extends React.Component {
          console.log(favoriteFuncs); // expect a blank array in console
          //true goes to new array created by filter function
          const filteredFuncs = favoriteFuncs.filter((func) => {
+            //if filter returns any part of the input ret true else ret false
             return func.name.toLowerCase().indexOf(searchInput) >= 0;
          });
          const orderArr = JSON.parse(this.state.orderBy);
          console.log("orderArr:", orderArr);
+         // orders the filter functions
          const orderedFuncs = orderBy(filteredFuncs, ...orderArr);
+         //setting the state displayed funcs to our filtered funcs
          this.setState({ displayedFuncs: orderedFuncs });
       } else {
          //  if it is not checked it will false if isfavcheck set the state to the opposite set this to the oppisite of state above ! single exclamation means opposite of isfavorite check
@@ -53,6 +59,7 @@ export default class App extends React.Component {
          const filteredFuncs = allFuncs.filter((func) => {
             return func.name.toLowerCase().indexOf(searchInput) >= 0;
          });
+         //storing params
          const orderArr = JSON.parse(this.state.orderBy);
          console.log("orderArr: ", ...orderArr);
          const orderedFuncs = orderBy(filteredFuncs, ...orderArr);
