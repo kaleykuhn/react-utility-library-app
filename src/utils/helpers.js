@@ -14,7 +14,7 @@ const isObject = (value) => {
       value !== null &&
       Array.isArray(value) === false
    );
-   // test if something is an object
+   // test if something is an object views null and array as object only need a return only true or false
    //if (typeof value === "object" && value!== null && Array.isArray(value) === false) {
    //return true
    //} else {
@@ -31,10 +31,10 @@ const convertDataType = (str) => {
    // eslint-disable-next-line
    if (str == Number(str)) return Number(str); // == check values but type dont matter return just num
    const parsedJSON = safelyParseJSON(str);
-   if (Array.isArray(parsedJSON)) return parsedJSON; // check if its an array parse
-   if (isObject(parsedJSON)) return parsedJSON; // inwards and og out func withing func within func
+   if (Array.isArray(parsedJSON)) return parsedJSON; // check if its an array parse true or false
+   if (isObject(parsedJSON)) return parsedJSON; // inwards and og out func within func within func
    return str;
 };
 // u can just to if without else evaluate in order one at a time if it doesnt happen moves on with str
 
-export { isObject, convertDataType, safelyParseJSON }; //syntax for named things
+export { isObject, convertDataType, safelyParseJSON }; //syntax for named identifier things

@@ -429,7 +429,7 @@ export default class utils {
    //Combine an Array into a string using join method
    //A1: string use the \W to define seperation
    //R: string as a sentence without punctuation
-   static sentensify(str) {
+   static sentisify(str) {
       var sepStr = str.split(/\W/).join(" ");
       console.log(sepStr);
       return sepStr;

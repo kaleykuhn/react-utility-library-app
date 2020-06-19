@@ -101,7 +101,7 @@ export const uiData = [
    {
       name: "length",
       desc: "Find the length of a string",
-      inputs: 2,
+      inputs: 1,
       type: "basic",
       typeNum: 100,
       isFavorite: false,
@@ -110,7 +110,7 @@ export const uiData = [
    {
       name: "first",
       desc: "Use bracket notation to find the first character in a String",
-      inputs: 2,
+      inputs: 1,
       type: "basic",
       typeNum: 100,
       isFavorite: false,
@@ -322,7 +322,7 @@ export const uiData = [
       inputs: 1,
       type: "Functional",
       typeNum: 300,
-      isFavorite: true,
+      isFavorite: false,
       order: 307,
    },
    {
@@ -332,7 +332,7 @@ export const uiData = [
       inputs: 1,
       type: "Functional",
       typeNum: 300,
-      isFavorite: false,
+      isFavorite: true,
       order: 308,
    },
    {
